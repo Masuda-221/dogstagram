@@ -1,0 +1,24 @@
+.navbar-mainLogo {
+  background-repeat: no-repeat;
+  background-image: url("/images/logo.png");
+}
+
+.navbar-nav > li {
+  margin-left: 20px;
+}
+
+.navbar-nav > li:first-child {
+  margin-left: 0;
+}
+
+.navbar-nav > li .commonNavIcon {
+  height: 24px;
+  width: 24px;
+  background-size: 22px !important;
+  background-repeat: no-repeat;
+}
+
+.navbar-nav > li .profile-icon {
+  background-image: url("/images/parts3.png");
+}
+
