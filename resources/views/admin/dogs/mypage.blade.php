@@ -1,6 +1,6 @@
 @extends('layouts.dogs')
 
-@section('title', '投稿一覧')
+@section('title', 'マイページ')
 
 @section('content')
   <div class="profile-wrap">
@@ -8,8 +8,7 @@
       <div class="col-md-4 text-center">
         @if ($user->profile->image)
           <p>
-            <img class="image" src="{{ secure_asset('storage/image/' . $user->profile->image) }}"/>
-            
+            <img class="round-img" src="{{ asset('storage/image/' . $user->profile->image) }}"/>
           </p>
           @else
             <img class="round-img" src="{{ asset('/images/blank_profile.png') }}"/>
@@ -18,11 +17,15 @@
       <div class="col-md-8">
         <div class="row">
           <h1>{{ $user->profile->nickname }}</h1>
- 
+            
+            <a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>
+            <a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+            
         </div>
         <div class="row">
           <p>
-            {{ $user->profile->profile_body }}
+            {{ $user->email }}
   
           </p>
         </div>
@@ -38,10 +41,9 @@
                     <h5 class="card-title"　maxlength="10">{{ $post->place }}</h5>
                     <p class="card-text">{{ $post->city }}</p>
                     <p class="card-text">{{ $post->body }}</p>
-                    {{--公開ページなので編集つけたらだめ
                     <div>
                         <a href="{{ action('Admin\DogsController@mycontents_edit', ['id' => $post->id]) }}">編集</a>
-                    </div>--}}
+                    </div>
                 </div>
             </div>
         @endforeach

@@ -8,8 +8,10 @@ use App\Tag;
 
 class DogsController extends Controller
 {
-    public function index(Request $request)
-    {
+  // 投稿された記事の一覧を表示する
+  public function index(Request $request)
+  {
+    //   dd($request->tags);
       $tags = Tag::all();
       
       $pref = $request->pref;
@@ -19,11 +21,28 @@ class DogsController extends Controller
       
       $query = Post::query();
       
-      $query->orWhere('pref', $pref)->orWhere('city', 'like', '%'.$city.'%')->orWhere('place',$place);
+    //   $query->orWhere('pref', $pref)->orWhere('city', 'like', '%'.$city.'%')->orWhere('place',$place);
+      
+       if ($pref != '') {
+         $query->where('pref', $pref);
+       }
+      
+       if(!empty($city)) {
+         $query->where('city', 'like', '%'.$city.'%');
+         }
+      
+       if ($place != '') {
+         $query->where('place', 'like', '%'.$place.'%');
+       }
+       
+      if ($request->tags && 0 < count($request->tags)){
+        // 画面から来たタグを持つ投稿をすべて検索する。（idはpostのid）
+        $query->whereIn('id', Post::getPostIdbyTags($request->tags));
+      }
+    
       
       $posts = $query->get();
       
       return view('dogs.index', ['posts' => $posts, 'pref' => $pref, 'tags' => $tags]);
-      
-    }
+  }
 }

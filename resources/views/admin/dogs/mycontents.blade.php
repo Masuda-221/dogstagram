@@ -1,3 +1,4 @@
+{{--dogs.showに変更
 @extends('layouts.dogs')
 @section('title', '登録済みコンテンツの一覧')
 
@@ -19,4 +20,4 @@
         @endforeach
     </div>
 </div>
-@endsection
+@endsection--}}

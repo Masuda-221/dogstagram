@@ -47,75 +47,70 @@ class DogsController extends Controller
       
       // データベースに保存する
       $post->fill($form);
-      
+      // ログイン中のユーザーのidをpostのuser_idに保存する
+      $post->user_id=Auth::id();
       $post->save();
     
       // タグがチェックされていれば保存する
-    if (0 < count($request->tags)) {
+    if (isset($request->tags) && 0 < count($request->tags)) {
         foreach($request->tags as $tagid) {
             $post->tags()->attach($tagid);
         }
     }
       
-      return redirect('admin/dogs/create');
-      
+      return redirect('admin/dogs/mypage');
   }
   
-  // 投稿された記事の一覧を表示する
-  public function index(Request $request)
-  {
-    //   dd($request->tags);
-      $tags = Tag::all();
+//  views/dogs/indexのコントローラー App\Http\Controllers\DogsControllerに移行しました
+// 投稿された記事の一覧を表示する
+//   public function index(Request $request)
+//   {
+//     //   dd($request->tags);
+//       $tags = Tag::all();
       
-      $pref = $request->pref;
-      $city = $request->city;
-      $place = $request->place;
-      // $tags = $request->tags;
+//       $pref = $request->pref;
+//       $city = $request->city;
+//       $place = $request->place;
+//       // $tags = $request->tags;
       
-      $query = Post::query();
+//       $query = Post::query();
       
-    //   $query->orWhere('pref', $pref)->orWhere('city', 'like', '%'.$city.'%')->orWhere('place',$place);
+//     //   $query->orWhere('pref', $pref)->orWhere('city', 'like', '%'.$city.'%')->orWhere('place',$place);
       
-       if ($pref != '') {
-         $query->where('pref', $pref);
-       }
+//       if ($pref != '') {
+//          $query->where('pref', $pref);
+//       }
       
-       if(!empty($city)) {
-         $query->where('city', 'like', '%'.$city.'%');
-         }
+//       if(!empty($city)) {
+//          $query->where('city', 'like', '%'.$city.'%');
+//          }
       
-       if ($place != '') {
-         $query->where('place', 'like', '%'.$place.'%');
-       }
+//       if ($place != '') {
+//          $query->where('place', 'like', '%'.$place.'%');
+//       }
        
-      if ($request->tags && 0 < count($request->tags)){
-        // 画面から来たタグを持つ投稿をすべて検索する。（idはpostのid）
-        $query->whereIn('id', Post::getPostIdbyTags($request->tags));
-      }
+//       if ($request->tags && 0 < count($request->tags)){
+//         // 画面から来たタグを持つ投稿をすべて検索する。（idはpostのid）
+//         $query->whereIn('id', Post::getPostIdbyTags($request->tags));
+//       }
     
       
-      $posts = $query->get();
+//       $posts = $query->get();
       
-      return view('admin.dogs.index', ['posts' => $posts, 'pref' => $pref, 'tags' => $tags]);
-  }
+//       return view('admin.dogs.index', ['posts' => $posts, 'pref' => $pref, 'tags' => $tags]);
+//   }
     
-    //プロフィールページを定義
+    
     public function show($user_id){
         
-       $user = Auth::user();
+        $user = User::find($user_id);
         
         return view('admin.dogs.show', ['user' => $user]);
-    //     public function show($user_id){
-    //   $user = User::where('id', $user_id)
-    //         ->firstOrFail();
-        
-    //     return view('admin.dogs.show', ['user' => $user]);
     }
+    
     
           public function profile_add()
       {
-          
-          
           return view('admin.dogs.create_profile');
       }
     
@@ -133,23 +128,51 @@ class DogsController extends Controller
       
       //　basenameでフルパスからファイル名だけ取り出す
       $profile->image = basename($path);
-        
+      unset($form['image']); 
         $profile->fill($form);
         // 現在ログインしているユーザーの情報が取れる
         $profile->user_id = Auth::id();
         $profile->save();
-        
-        return view('admin.dogs.mycontents', ['user' => Auth::user(),'profile',$profile]);
+        // 対象のURLにアクセス、
+        return redirect('admin/dogs/mypage');
     }
     
     //プロフィールを編集
     public function edit(Request $request)
     {
+        // Profileモデルからデータを取得する
         $profile = Profile::find($request->id);
         if (empty($profile)) {
         abort(404);    
       }    
         return view('admin.dogs.edit', ['profile' => $profile, 'user' => Auth::user()]);
+        
+    }
+    
+    
+    public function update(Request $request)
+    {
+        // validate をかける
+        $this -> validate($request, Profile::$rules);
+        // Profileモデルからデータを取得する
+        $profile = Profile::find($request->id);
+        // 送信されてきたフォームデータを格納する
+        $form = $request->all();
+        
+        $path = $request->file('image')->store('public/image');
+        
+        //　basenameでフルパスからファイル名だけ取り出す
+        $profile->image = basename($path);
+        unset($form['_token']);
+        unset($form['image']);
+        
+        
+        // 該当するデータを上書きして保存する
+        $profile ->fill($form)->save();
+        
+        
+           
+        return redirect('admin/dogs/mypage');
         
     }
     
@@ -186,8 +209,8 @@ class DogsController extends Controller
         $posts = Post::find($request->id);
         //送信されてきたフォームデータを格納する
         $posts = $request->all();
-        //いる？
-        //unset($posts_form['tags']);
+        // いる？
+        // unset($news_form['_token']);
         
         //該当データを上書きして保存する
         $posts->fill($posts)->save();
@@ -200,5 +223,12 @@ class DogsController extends Controller
     }
         
         return redirect('admin/dogs/mycontents');
+    }
+    
+    public function mypage(){
+        
+       $user = Auth::user();
+        
+        return view('admin.dogs.mypage', ['user' => $user]);
     }
 }

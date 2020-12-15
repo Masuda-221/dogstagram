@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('city');
             $table->string('place');
             $table->timestamps();
+            
         });
     }
 

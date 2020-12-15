@@ -1,8 +1,10 @@
+{{--dogs.index.blade.php に以降しました
 @extends('layouts.dogs')
 @section('title','投稿一覧')
 
 @section('content')
 
+{{--いらない
 <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
     サインアウト<br/>
 </a>
@@ -36,7 +38,7 @@
                         </div>
                         
                     </div>
-                    
+                    asdjkl
                     
                     @foreach ($tags as $tag)
                         <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
@@ -58,13 +60,15 @@
                                 <h5 class="card-title"　maxlength="10">{{ $post->place }}</h5>
                                 <p class="card-text">{{ $post->city }}</p>
                                 <p class="card-text">{{ $post->body }}</p>
+                                <p class="card-text">{{ $post->user->profile->nickname }}</p>
                             </div>
                         </div>
                         {{--<td><img src="{{ secure_asset('storage/image/' . $post->image_path) }}"></td>
                         <td>{{ $post->pref }}</td>
                         <td>{{ $post->body }}</td>
-                        <td>{{ $post->place }}</td>--}}
+                        <td>{{ $post->place }}</td>
                     @endforeach
+                    
                 </div>
             </form>
             
@@ -72,4 +76,4 @@
         </div>
         
     </div>
-@endsection
+@endsection--}}
