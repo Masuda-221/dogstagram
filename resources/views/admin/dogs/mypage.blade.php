@@ -8,10 +8,12 @@
       <div class="col-md-4 text-center">
         @if ($user->profile->image)
           <p>
-            <img class="round-img" src="{{ asset('storage/image/' . $user->profile->image) }}"/>
+            <div class="profile_image" style="width: 18rem;">
+            <img style="object-fit: cover;  width:100%; height:180; "　src="{{ asset('storage/image/' . $user->profile->image) }}"/>
+            </div>
           </p>
           @else
-            <img class="round-img" src="{{ asset('/images/blank_profile.png') }}"/>
+            <img class="" src="{{ asset('/images/blank_profile.png') }}"/>
         @endif
       </div>
       <div class="col-md-8">
@@ -19,13 +21,19 @@
           <h1>{{ $user->profile->nickname }}</h1>
             
             <a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>
-            <a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
+            {{--<a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>--}}
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
             
         </div>
         <div class="row">
           <p>
             {{ $user->email }}
+  
+          </p>
+        </div>
+        <div class="row">
+          <p>
+            {{ $user->profile->profile_body }}
   
           </p>
         </div>

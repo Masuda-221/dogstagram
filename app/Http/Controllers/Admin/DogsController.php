@@ -105,7 +105,7 @@ class DogsController extends Controller
         
         $user = User::find($user_id);
         
-        return view('admin.dogs.show', ['user' => $user]);
+        return view('dogs.show', ['user' => $user]);
     }
     
     

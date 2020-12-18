@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Tag;
+use App\User;
+use App\Profile;
+use Auth;
 
 class DogsController extends Controller
 {
@@ -45,4 +48,11 @@ class DogsController extends Controller
       
       return view('dogs.index', ['posts' => $posts, 'pref' => $pref, 'tags' => $tags]);
   }
+  
+   public function show($user_id){
+        
+        $user = User::find($user_id);
+        
+        return view('dogs.show', ['user' => $user]);
+    }
 }

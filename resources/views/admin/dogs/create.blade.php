@@ -63,7 +63,7 @@
                     </div>
                     
                     <div class="form-group row">
-                        <label class="col-md-2" for="title">店名または場所名</label>
+                        <label class="col-md-2" for="title">キーワード</label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" name="place" value="{{ old('name') }}">
                         </div>

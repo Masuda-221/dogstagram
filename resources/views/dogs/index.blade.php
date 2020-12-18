@@ -13,7 +13,7 @@
     <div class="container">
         
         <div class="row">
-            <form action="{{ action('Admin\DogsController@index') }}" method="get">
+            <form action="{{ action('DogsController@index') }}" method="get">
             
                 <div class="TopSerch">
                     <div class="form-group row" >
@@ -32,11 +32,11 @@
                         </div>
                         
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="place" placeholder="店名または場所名">
+                            <input type="text" class="form-control" name="place" placeholder="キーワード・店名">
                         </div>
                         
                     </div>
-                    asdjkl
+                    
                     
                     @foreach ($tags as $tag)
                         <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
@@ -60,7 +60,7 @@
                                 <p class="card-text">{{ $post->body }}</p>
                                 
                                 <div>
-                                <a href="{{ action('Admin\DogsController@show', ['user_id' => $post->user_id]) }}">{{ $post->user->profile->nickname }}</a>
+                                <a href="{{ action('DogsController@show', ['user_id' => $post->user_id]) }}"><span>@</span>{{ $post->user->profile->nickname }}</a>
                                 </div>
                             </div>
                         </div>
