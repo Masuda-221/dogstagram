@@ -200,29 +200,38 @@ class DogsController extends Controller
         return view('admin.dogs.mycontents_edit',['posts'=>$posts,'tags' => $tags]);
     }
     
-    //投稿したコンテンツを削除
+    //投稿したコンテンツを上書き
     public function mycontents_update(Request $request)
     {
-        //Validationをかける（入力チェック）PostModelの$rules
-        $this->validate($request,Post::$rules);
         //PostModelからコンテンツを取得
-        $posts = Post::find($request->id);
+        $post = Post::find($request->id);
         //送信されてきたフォームデータを格納する
-        $posts = $request->all();
-        // いる？
-        // unset($news_form['_token']);
+        $form = $request->all();
+        
+        if ($request->file('image')) {
+          $path = $request->file('image')->store('public/image');
+          $form['image_path'] = basename($path);
+        } else {
+          $form['image_path'] = $post->image_path;
+        }
+      
+        unset($form['_token']);
+        unset($form['image']);
+        unset($form['tags']);
         
         //該当データを上書きして保存する
-        $posts->fill($posts)->save();
         
-        $post->tags()->detach();
-        if (0 < count($request->tags)) {
-        foreach($request->tags as $tagid) {
-            $post->tags()->attach($tagid);
+        $post->fill($form)->save();
+        
+        if (isset($request->tags) && 0 < count($request->tags)){
+            $post->tags()->detach();
+            
+            foreach($request->tags as $tagid) {
+                $post->tags()->attach($tagid);
+            }
         }
-    }
         
-        return redirect('admin/dogs/mycontents');
+        return redirect('admin/dogs/mypage');
     }
     
     public function mypage(){
@@ -230,5 +239,14 @@ class DogsController extends Controller
        $user = Auth::user();
         
         return view('admin.dogs.mypage', ['user' => $user]);
+    }
+    
+    //投稿の削除機能
+    public function postsdestroy($post_id){
+        
+        $post = Post::find($post_id);
+        $post->delete();
+        
+        return redirect('admin/dogs/mypage');
     }
 }

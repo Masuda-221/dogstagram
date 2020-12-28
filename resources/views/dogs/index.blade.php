@@ -10,7 +10,7 @@
 {{ csrf_field() }}
 </form>
 
-    <div class="container">
+    <div class="container mt-5">
         
         <div class="row">
             <form action="{{ action('DogsController@index') }}" method="get">
@@ -26,7 +26,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="col-md-2">
                             <input type="text" class="form-control" name="city" placeholder="市町村">
                         </div>
@@ -35,45 +35,69 @@
                             <input type="text" class="form-control" name="place" placeholder="キーワード・店名">
                         </div>
                         
-                    </div>
-                    
-                    
-                    @foreach ($tags as $tag)
-                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
-                    @endforeach
+                        <div class="form-group row　align-items-center">    
+                            @foreach ($tags as $tag)
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}
+                            @endforeach
                             
-                    <input type="submit" class="btn btn-primary" value="その他↓">
-                        
-                    <div class="col-md-4">
-                        {{ csrf_field() }}
-                        <input type="submit" class="btn btn-primary" value="検索">
-                    </div>
-                </div>
-                
-                <div class="row">
-                    @foreach($posts as $post)
-                        <div class="card" style="width: 18rem;">
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ secure_asset('storage/image/' . $post->image_path) }}"/>
-                            <div class="card-body">
-                                <h5 class="card-title"　maxlength="10">{{ $post->place }}</h5>
-                                <p class="card-text">{{ $post->city }}</p>
-                                <p class="card-text">{{ $post->body }}</p>
-                                
-                                <div>
-                                <a href="{{ action('DogsController@show', ['user_id' => $post->user_id]) }}"><span>@</span>{{ $post->user->profile->nickname }}</a>
-                                </div>
-                            </div>
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-primary" value="検索">
+                           
                         </div>
-                        {{--<td><img src="{{ secure_asset('storage/image/' . $post->image_path) }}"></td>
-                        <td>{{ $post->pref }}</td>
-                        <td>{{ $post->body }}</td>
-                        <td>{{ $post->place }}</td>--}}
-                    @endforeach
-                    
+                    </div>
                 </div>
             </form>
-            
-            
+        </div>
+        
+        <div class="row">
+            @foreach($posts as $post)
+                <div class="card" style="width: 18rem;">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ secure_asset('storage/image/' . $post->image_path) }}"/>
+                    <div class="card-body">
+                        <h5 class="card-title"　maxlength="10">{{ $post->place }}</h5>
+                        <p class="card-text">{{ $post->city }}</p>
+                        <p class="card-text">{{ $post->body }}</p>
+                        <a href="{{ action('DogsController@show', ['user_id' => $post->user_id]) }}"><span>@</span>{{ $post->user->profile->nickname }}</a>
+                        {{--@Auth ログインしていないと実行されない--}}
+                        @Auth
+                            {{-- likesがnullじゃなかったら　--}}
+                            @if ($post->likes != NULL)
+                                {{ $post->likes->count() }}
+                            @endif
+                            <div id="like-icon-post-{{ $post->id }}">
+                                @if ($post->likedBy(Auth::user())->count() > 0)
+                                    {{--relでファイルとの関係性を、hrefで そのファイルがある場所（URL）を指定--}}
+                                    <a class="loved hide-text" data-remote="true" rel="nofollow" data-method="DELETE" href="/likes/{{ $post->likedBy(Auth::user())->firstOrFail()->id }}">いいねを取り消す</a>
+                                @else
+                                    <a class="love hide-text" data-remote="true" rel="nofollow" data-method="POST" href="/posts/{{ $post->id }}/likes">いいね</a>
+                                @endif
+                            </div>
+                        @endauth
+                        <a class="comment" href="#"></a>
+                    
+                        <div id="like-text-post-{{ $post->id }}">
+                            @include('dogs.like_text')
+                        </div>
+                        <span><strong>{{ $post->user->name }}</strong></span>
+                        <span>{{ $post->caption }}</span>
+                    
+                        <div id="comment-post-{{ $post->id }}">
+                            @include('dogs.comment_list')
+                        </div>
+                        @Auth
+                            <a class="light-color post-time" href="/posts/{{ $post->id }}">{{ $post->created_at }}</a>
+                            <div class="row actions" id="comment-form-post-{{ $post->id }}">
+                                <form class="w-100" id="new_comment" action="/posts/{{ $post->id }}/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+                                    {{csrf_field()}} 
+                                    
+                                    <input value="{{ $post->id }}" type="hidden" name="post_id" />
+                                    <input class="form-control comment-input border-0" placeholder="コメント ..." autocomplete="off" type="text" name="comment" />
+                                </form>
+                            </div>
+                        @endauth
+                    </div>
+                </div>
+            @endforeach
         </div>
         
     </div>

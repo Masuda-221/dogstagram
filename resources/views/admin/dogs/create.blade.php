@@ -25,10 +25,6 @@
                 
                 <div class="main">
                     
-                    <div class="copy-container">
-                        <h1 class="page-title">作成</h1>
-                    </div>
-                    
                     <div class="contents">
                         <label class="col-md-10" for="title">画像<span>※必須</span></label>
                         <div class="col-md-10">

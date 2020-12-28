@@ -2,6 +2,7 @@
 @section('title', 'プロフィール編集')
 
 @section('content')
+
 <div class="container">
   <div class="row">
 @if (count($errors) > 0)
@@ -16,11 +17,8 @@
       <th>{{ $user->profile->id}}</th>
       <td>{{ $user->profile->nickname}}</td>
     </tr>--}}
+
     
- <div class="col-md-offset-2 mb-4 edit-profile-wrapper">
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      <div class="profile-form-wrap">
         {{--サブミットが押されると、form内のアクションになる--}}
         <form class="edit_user" enctype="multipart/form-data" action="{{ action('Admin\DogsController@update') }}" method="post">
           <input type="hidden" name="id" value="{{ $user->profile->id }}" />
@@ -61,7 +59,6 @@
           <input type="submit" value="変更する" class="btn btn-primary" data-disable-with="変更する" />
         </div>
       </form>
-    </div>
-  </div>
+      </div>
 </div>
 @endsection
