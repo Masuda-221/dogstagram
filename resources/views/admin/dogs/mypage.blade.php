@@ -32,6 +32,8 @@
             {{ $user->profile->profile_body }}
           </p>
         </div>
+        
+        
       </div>
   </div>
   

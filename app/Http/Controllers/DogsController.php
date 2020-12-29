@@ -49,10 +49,44 @@ class DogsController extends Controller
       return view('dogs.index', ['posts' => $posts, 'pref' => $pref, 'tags' => $tags]);
   }
   
-   public function show($user_id){
-        
+   public function show($user_id)
+   {
         $user = User::find($user_id);
+        $count_followings = $user->followings()->count();
+        $count_followers = $user->followers()->count();
         
-        return view('dogs.show', ['user' => $user]);
+        
+        return view('dogs.show', ['user' => $user,'count_followings' => $count_followings,'count_followers' => $count_followers]);
     }
+  
+  public function followings($id)
+    {
+        $user = User::find($id);
+        $followings = $user->followings()->paginate(9);
+
+        $data = [
+            'user' => $user,
+            'users' => $followings,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('dogs.show', $data);
+    }
+
+    public function followers($id)
+    {
+        $user = User::find($id);
+        $followers = $user->followers()->paginate(9);
+
+        $data = [
+            'user' => $user,
+            'users' => $followers,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('dogs.show', $data);
+    }
+  
 }

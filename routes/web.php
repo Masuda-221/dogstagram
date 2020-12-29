@@ -30,11 +30,13 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     // 投稿の削除機能
     Route::post('postsdelete/{post_id}', 'Admin\DogsController@postsdestroy');
     
-    
     // mypageに変更した
     Route::get('dogs/mycontents/{user_id}', 'Admin\DogsController@mycontents');
     Route::get('dogs/mycontents_edit', 'Admin\DogsController@mycontents_edit');
     Route::post('dogs/mycontents_edit', 'Admin\DogsController@mycontents_update');
+    
+    // フォロー中のユーザー達が投稿した記事一覧
+    Route::get('dogs/following_user', 'Admin\DogsController@following_user');
     
     });
      
@@ -57,6 +59,17 @@ Route::post('posts/{comment_id}/comments', 'CommentsController@commentsstore')->
 //コメント取り消し
 Route::get('comments/{comment_id}', 'CommentsController@commentsdestroy')->middleware('auth');
 
+//フォロー機能
+Route::group(['prefix' => 'users/{id}'], function () {
+    Route::get('followings', 'DogsController@followings')->name('followings');
+    Route::get('followers', 'DogsController@followers')->name('followers');
+    });
+    
+Route::group(['prefix' => 'users/{id}'], function () {
+    Route::post('follow', 'FollowUserController@store')->name('follow');
+    Route::delete('unfollow', 'FollowUserController@destroy')->name('unfollow');
+});
+    
 Route::get('test',function(){
 return view('admin.dogs.test');
 });
