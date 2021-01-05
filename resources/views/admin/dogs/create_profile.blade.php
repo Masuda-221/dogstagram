@@ -3,7 +3,7 @@
 @section('title', 'プロフィール編集')
 
 @section('content')
-    <div class="col-md-8 mx-auto">
+    <div class="container mt-5 col-md-8 mx-auto">
                 <h2>プロフィール新規作成</h2>
                 <form action="{{ action('Admin\DogsController@create_profile') }}" method="post" enctype="multipart/form-data">
 

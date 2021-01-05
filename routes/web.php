@@ -53,6 +53,11 @@ Route::get('dogs/show/{user_id}', 'DogsController@show');
 Route::get('posts/{post_id}/likes', 'LikesController@store')->middleware('auth');
 //いいね取消処理
 Route::get('likes/{like_id}', 'LikesController@destroy')->middleware('auth');
+//いいね処理
+Route::get('posts/{post_id}/likes/show', 'LikesController@storeShow')->middleware('auth');
+//いいね取消処理
+Route::get('likes/show/{like_id}', 'LikesController@destroyShow')->middleware('auth');
+
 
 //コメント投稿
 Route::post('posts/{comment_id}/comments', 'CommentsController@commentsstore')->middleware('auth');

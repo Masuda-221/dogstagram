@@ -26,6 +26,7 @@
         
         <link href="{{ secure_asset('css/navbar.css') }}" rel="stylesheet">
         <link href="{{ secure_asset('css/posts.css') }}" rel="stylesheet">
+        <!--<link href="{{ secure_asset('css/index.css') }}" rel="stylesheet">-->
         
         
         
@@ -50,7 +51,7 @@
                     <a class="nav-link" href="{{ action('Admin\DogsController@mypage') }}">マイページ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ action('Admin\DogsController@following_user') }}">フォロー中</a>
+                    <a class="nav-link" href="{{ action('Admin\DogsController@create_profile') }}">プロフィール作成</a>
                   </li>
                 </ul>
 

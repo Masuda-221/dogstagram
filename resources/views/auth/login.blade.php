@@ -45,7 +45,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('パスワードを記憶しますか？') }}
+                                        {{ __('ログイン情報を保存しますか？') }}
                                     </label>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('パスワードをお忘れですか？') }}
+                                        {{ __('パスワードを忘れた場合') }}
                                     </a>
                                 @endif
                             </div>
@@ -73,7 +73,7 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('アカウント新規作成') }}</div>
+                <div class="card-header">{{ __('アカウントをお持ちでないですか？') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

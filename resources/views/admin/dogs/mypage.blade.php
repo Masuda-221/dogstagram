@@ -6,7 +6,7 @@
 <div class="container mt-5 ">
   <div class="row mb-5">
     <div class="col-md-4 text-center">
-      @if ($user->profile->image)
+      @if (!empty($user->profile->image))
           <div class="profile_image" style="width: 18rem;">
             <img style="object-fit: cover;  width:100%; height:180; "　src="{{ secure_asset('storage/image/' . $user->profile->image) }}"/>
           </div>
@@ -16,7 +16,12 @@
     </div>
     <div class="col-md-8">
       <div class="row">
-        <h1>{{ $user->profile->nickname }}</h1>
+        @if(!empty($user->profile->nickname))
+          <h1>{{ $user->profile->nickname }}</h1>
+        @else
+          <h1>ニックネームは未設定です</h1>
+        @endif
+        
         
         <a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>
         {{--<a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>--}}
