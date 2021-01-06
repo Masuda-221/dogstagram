@@ -22,20 +22,30 @@
           <h1>ニックネームは未設定です</h1>
         @endif
         
+        @if(!empty($user->profile->id))
+          <a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>
+          {{--<a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>--}}
+        @else
+          <h1>　</h1>
+        @endif
         
-        <a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>
-        {{--<a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>--}}
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
       </div>
+      
         <div class="row"> 
           <p>
             {{ $user->email }}
           </p>
         </div>
         <div class="row">
-          <p>
-            {{ $user->profile->profile_body }}
-          </p>
+          
+          @if(!empty($user->profile->profile_body))
+            <p>
+              {{ $user->profile->profile_body }}
+            </p>
+          @else
+            <h1>本文は未設定です</h1>
+          @endif
         </div>
         
         

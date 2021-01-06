@@ -1,26 +1,21 @@
 .navbar {
-  background-color: #fff;
+  /*background-color: #fff;*/
   border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
-  height: 77px;
+  height: 110px;
 }
 
-.navbar.mainLogo {
-  font-weight: bolder;
-  font-size: 1rem;
+.navbar__brand {
+  height: 80px;
+  width: 160px;
+  background-size: 160px;
+}
+
+.navbar__mainLogo {
+  background-repeat: no-repeat;
+  background-image: url("/images/doggarden_logo_180_90.png");
 }
 
 .navbar-nav > li {
   margin-left: 20px;
-}
-
-.navbar-nav > li .commonNavIcon {
-  height: 24px;
-  width: 24px;
-  background-size: 22px !important;
-  background-repeat: no-repeat;
-}
-
-.navbar-nav > li .profile-icon {
-  background-image: url("/images/parts3.png");
 }
 
