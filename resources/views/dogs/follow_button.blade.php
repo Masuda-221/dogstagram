@@ -7,7 +7,7 @@
             <form method="post" action="{{ route('unfollow', [$user->id]) }}">
                 {{csrf_field()}} 
                 @method('delete')
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary mr-4">
                     このユーザーのフォローを外す
                 </button>
             </form>
@@ -15,7 +15,7 @@
             
             <form method="post" action="{{ route('follow', [$user->id]) }}">
                 {{csrf_field()}} 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary mr-4">
                     このユーザをフォローする
                 </button>
             </form>

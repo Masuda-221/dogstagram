@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-5 col-md-8 mx-auto">
-                <h2>プロフィール新規作成</h2>
+                <h4>プロフィール新規作成</h4>
                 <form action="{{ action('Admin\DogsController@create_profile') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
@@ -14,7 +14,7 @@
                             @endforeach
                         </ul>
                     @endif
-                    <div class="form-group row">
+                    <div class="form-group row mt-4">
                         <label class="col-md-2" for="title">画像</label>
                         <div class="col-md-10">
                             <input type="file" class="form-control-file" name="image">
@@ -30,7 +30,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">本文</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="profile_body" rows="20">{{ old('profile_body') }}</textarea>
+                            <textarea class="form-control" name="profile_body" rows="10">{{ old('profile_body') }}</textarea>
                         </div>
                     </div>
 

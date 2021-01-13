@@ -14,15 +14,15 @@ use Auth;
 class DogsController extends Controller
 {
     public function add()
-  {
-      $tags = Tag::all();
-      
-      return view('admin.dogs.create',['tags'=> $tags]);
-  }
+    {
+    $tags = Tag::all();
+    
+    return view('admin.dogs.create',['tags'=> $tags]);
+    }
   
   
   
-  public function create(Request $request)
+ public function create(Request $request)
   {
       // Varidationを行う
       $this->validate($request, Post::$rules);
@@ -156,6 +156,8 @@ class DogsController extends Controller
     //投稿したコンテンツを上書き
     public function mycontents_update(Request $request)
     {
+        // Varidationを行う
+        $this->validate($request, Post::$rules);
         //PostModelからコンテンツを取得
         $post = Post::find($request->id);
         //送信されてきたフォームデータを格納する
@@ -189,9 +191,11 @@ class DogsController extends Controller
     
     public function mypage(){
         
-       $user = Auth::user();
-        
-        return view('admin.dogs.mypage', ['user' => $user]);
+        $user = Auth::user();
+        $count_followings = $user->followings()->count();
+        $count_followers = $user->followers()->count();
+         
+        return view('admin.dogs.mypage', ['user' => $user,'count_followings' => $count_followings,'count_followers' => $count_followers]);
     }
     
     //投稿の削除機能

@@ -13,6 +13,10 @@ class Post extends Model
     
     public static $rules = array(
         'image' =>'required',
+        'pref' =>'required',
+        'city' =>'required',
+        'place' =>'required',
+        
         );
     
     // 配列にあるタグIDを持つ投稿のIDを配列にして返す

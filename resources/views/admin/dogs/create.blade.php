@@ -26,42 +26,47 @@
                     <div class="main">
                         
                         <div class="contents">
-                            <label class="col-md-10" for="title">画像<span>※必須</span></label>
-                            <div class="col-md-10">
-                                <input type="file" class="form-control-file" name="image">
+                            <div class="form-group row">
+                                <label class="col-md-10" for="title">画像</label>
+                                <div class="col-md-10">
+                                    <input type="file" class="form-control-file" name="image">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="contents">
-                            <label class="col-md-2" for="body">本文</label>
-                            <div class="col-md-10">
-                                <textarea class="form-control" name="body" rows="20">{{ old('body') }}</textarea>
+                            <div class="form-group row">
+                                <label class="col-md-2" for="body">本文</label>
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="form-group row">
-                            <label class="col-md-2" for="title">都道府県</label>
-                            <div class="col-md-3">
-                                <select type="text" class="form-control" name="pref">                          
-                                    @foreach(config('pref') as $key => $score)
-                                        <option value="{{ $score }}">{{ $score }}</option>
-                                    @endforeach
-                                </select>
-                                
+                        <div class="contents"> 
+                            <div class="form-group row mt-2">
+                                <label class="col-md-2" for="title">都道府県</label>
+                                <div class="col-md-3">
+                                    <select type="text" class="form-control" name="pref">                          
+                                        @foreach(config('pref') as $key => $score)
+                                            <option value="{{ $score }}">{{ $score }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         
-                        <div class="form-group row">
-                            <label class="col-md-2" for="title">市町村</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" name="city" value="{{ old('city') }}">
+                            <div class="form-group row">
+                                <label class="col-md-2" for="title">市町村</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="city" value="{{ old('city') }}">
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                            <label class="col-md-2" for="title">キーワード</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" name="place" value="{{ old('name') }}">
+                            
+                            <div class="form-group row">
+                                <label class="col-md-2" for="title">キーワード</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="place" value="{{ old('name') }}">
+                                </div>
                             </div>
                         </div>
                             
