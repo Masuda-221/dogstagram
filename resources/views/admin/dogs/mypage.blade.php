@@ -7,9 +7,7 @@
   <div class="row mb-5">
     <div class="col-md-4 text-center">
       @if (!empty($user->profile->image))
-          <div class="profile_image" style="width: 18rem;">
-            <img style="object-fit: cover;  width:100%; height:180; "　src="{{ secure_asset('storage/image/' . $user->profile->image) }}"/>
-          </div>
+          <img class="round-img" src="{{ secure_asset('storage/image/' . $user->profile->image) }}"/>
       @else
         <img class="round-img" src="{{ secure_asset('/images/blank_profile.png') }}"/>
       @endif
@@ -38,13 +36,12 @@
         </p>
       </div>
       <div class="row">
-        
         @if(!empty($user->profile->profile_body))
-          <p>
-            {{ $user->profile->profile_body }}
-          </p>
+        <h5>
+          {{ $user->profile->profile_body }}
+        </h5>
         @else
-          <h4 class="text-secondary">本文は未設定です</h4>
+        <h5 class="text-secondary">本文は未設定です</h5>
         @endif
       </div>
       <div class="row">

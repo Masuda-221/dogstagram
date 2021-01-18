@@ -70,12 +70,10 @@
         </div>
     </div>
     
-    
     <div class="row mx-auto col-md-8 justify-content-center mt-5">
         <P>アカウントをお持ちでないですか？</P>
         <a href="{{ route('register') }}">アカウント新規作成</a>
     </div>
+    
 </div>
-    
-    
 @endsection

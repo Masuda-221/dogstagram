@@ -8,29 +8,27 @@
         <div class="row">
             <div class="col-md-4 text-center">
             @if (!empty($user->profile->image))
-                <div class="profile_image" style="width: 18rem;">
-                    <img style="object-fit: cover;  width:100%; height:180; "　src="{{ secure_asset('storage/image/' . $user->profile->image) }}"/>
-                </div>
+              <img class="round-img" src="{{ secure_asset('storage/image/' . $user->profile->image) }}"/>
             @else
-                <img class="round-img" src="{{ secure_asset('/images/blank_profile.png') }}"/>
+              <img class="round-img" src="{{ secure_asset('/images/blank_profile.png') }}"/>
             @endif
             </div>
             <div class="col-md-8">
                 <div class="row">
-                    @if(!empty($user->profile->nickname))
-                    <h1>{{ $user->profile->nickname }}</h1>
-                    @else
-                    <h1 class="text-secondary">ニックネームは未設定です</h1>
-                    @endif
-                    
-                    @if(!empty($user->profile->id))
-                    <a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>
-                    {{--<a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>--}}
-                    @else
-                    <h1>　</h1>
-                    @endif
+                  @if(!empty($user->profile->nickname))
+                  <h1>{{ $user->profile->nickname }}</h1>
+                  @else
+                  <h1 class="text-secondary">ニックネームは未設定です</h1>
+                  @endif
                   
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                  @if(!empty($user->profile->id))
+                  <a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>
+                  {{--<a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>--}}
+                  @else
+                  <h1>　</h1>
+                  @endif
+                  
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                 </div>
                 
                 <div class="row"> 
@@ -39,14 +37,13 @@
                     </p>
                 </div>
                 <div class="row">
-                  
-                    @if(!empty($user->profile->profile_body))
-                    <p>
-                      {{ $user->profile->profile_body }}
-                    </p>
-                    @else
-                    <h4 class="text-secondary">本文は未設定です</h4>
-                    @endif
+                  @if(!empty($user->profile->profile_body))
+                  <h5>
+                    {{ $user->profile->profile_body }}
+                  </h5>
+                  @else
+                  <h5 class="text-secondary">本文は未設定です</h5>
+                  @endif
                 </div>
                 <div class="row">
                     @include('dogs.follow_button',['user'=>$user])
@@ -59,8 +56,6 @@
             </div>
         </div>
     </div>
-  
-
   
     <div class="row">
         @foreach($user->posts as $post)
