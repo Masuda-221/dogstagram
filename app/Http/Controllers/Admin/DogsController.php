@@ -57,7 +57,6 @@ class DogsController extends Controller
                 $post->tags()->attach($tagid);
             }
         }
-        
         return redirect('admin/dogs/mypage');
     }
   
@@ -159,8 +158,10 @@ class DogsController extends Controller
         $form = $request->all();
         
         if ($request->file('image')) {
-            $path = $request->file('image')->store('public/image');
-            $form['image_path'] = basename($path);
+            // $path = $request->file('image')->store('public/image');
+            $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+            // $form['image_path'] = basename($path);
+            $form['image_path'] = Storage::disk('s3')->url($path);
         } else {
             $form['image_path'] = $post->image_path;
         }
