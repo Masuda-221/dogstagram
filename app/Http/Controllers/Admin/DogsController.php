@@ -10,6 +10,7 @@ use App\User;
 use App\Profile;
 use App\FollowUser;
 use Auth;
+use Storage;
 
 class DogsController extends Controller
 {

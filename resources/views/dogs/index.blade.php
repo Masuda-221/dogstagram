@@ -43,7 +43,8 @@
         <div id="Gallery" class="row gallery pad-top-sm">
             @foreach($posts as $post)
                 <div class="card mx-auto mt-2" style="width: 23rem;">
-                    <img class="img-responsive-100 bd-placeholder-img card-img-top" width="100%" height="180" src="{{ secure_asset('storage/image/' . $post->image_path) }}"/>
+                    {{--<img class="img-responsive-100 bd-placeholder-img card-img-top" width="100%" height="180" src="{{ secure_asset('storage/image/' . $post->image_path) }}"/>--}}
+                    <img class="img-responsive-100 bd-placeholder-img card-img-top" width="100%" height="180" src="{{ $post->image_path }}"/>
                     <div class="card-body">
                         @Auth
                             <div class="row align-items-center pl-2 pb-2">
