@@ -30,10 +30,12 @@ class DogsController extends Controller
         $form = $request->all();
         
         // storeというメソッドで保存、$pathに画像のフルパスが入る
-        $path = $request->file('image')->store('public/image');
+        // $path = $request->file('image')->store('public/image');
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
         
         //　basenameでフルパスからファイル名だけ取り出す
-        $post->image_path = basename($path);
+        // $post->image_path = basename($path);
+        $post->image_path = Storage::disk('s3')->url($path);
         
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
