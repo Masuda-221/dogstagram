@@ -7,7 +7,7 @@
   <div class="row mb-5">
     <div class="col-md-4 text-center">
       @if (!empty($user->profile->image))
-          <img class="round-img" src="{{ $user->profile->image) }}"/>
+          <img class="round-img" src="{{ $user->profile->image }}"/>
       @else
         <img class="round-img" src="{{ secure_asset('/images/blank_profile.png') }}"/>
       @endif
@@ -56,7 +56,7 @@
   <div class="row">
     @foreach($user->posts as $post)
     <div class="card mx-auto" style="width: 70rem;">
-      <img class="img-responsive-100 bd-placeholder-img card-img-top" width="100%" height="180" src="{{ $post->image_path) }}"/>
+      <img class="img-responsive-100 bd-placeholder-img card-img-top" width="100%" height="180" src="{{ $post->image_path }}"/>
       <div class="card-body">
         @Auth
           <div class="row align-items-center pl-2 pb-2">
