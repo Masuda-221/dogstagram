@@ -76,10 +76,12 @@ class DogsController extends Controller
         
         unset($form['_token']);
         // データベースに保存する
-        $path = $request->file('image')->store('public/image');
+        // $path = $request->file('image')->store('public/image');
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
         
         //　basenameでフルパスからファイル名だけ取り出す
-        $profile->image = basename($path);
+        // $profile->image = basename($path);
+        $profile->image = Storage::disk('s3')->url($path);
         unset($form['image']); 
         $profile->fill($form);
         // 現在ログインしているユーザーの情報が取れる
@@ -111,10 +113,12 @@ class DogsController extends Controller
         // 送信されてきたフォームデータを格納する
         $form = $request->all();
         
-        $path = $request->file('image')->store('public/image');
+        // $path = $request->file('image')->store('public/image');
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
         
         //　basenameでフルパスからファイル名だけ取り出す
-        $profile->image = basename($path);
+        // $profile->image = basename($path);
+        $profile->image = Storage::disk('s3')->url($path);
         unset($form['_token']);
         unset($form['image']);
         
