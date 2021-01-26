@@ -20,56 +20,31 @@
 
         {{-- Styles --}}
         {{-- Laravel標準で用意されているCSSを読み込む --}}
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         
-        <link href="{{ secure_asset('css/navbar.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ secure_asset('css/posts.css') }}" rel="stylesheet">
     </head>
     
     <body>
         {{-- ナビゲーションバー --}}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white" >
+  <a class="navbar-brand " href="#"><img src="/images/dog_garden_logo.png" style="height: 28px; width: 250px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ action('Admin\DogsController@create') }}">投稿<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="{{ action('Admin\DogsController@mypage') }}">マイページ</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link disabled" href="{{ action('Admin\DogsController@create_profile') }}">プロフィール作成</a>
       </li>
     </ul>
-  </div>
-</nav>
-
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar__brand navbar__mainLogo" href="/"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('Admin\DogsController@create') }}">投稿<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('Admin\DogsController@mypage') }}">マイページ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('Admin\DogsController@create_profile') }}">プロフィール作成</a>
-                    </li>
-                </ul>
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto">
                 {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
                     @guest
                         <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
@@ -94,12 +69,59 @@
                         </li>
                     @endguest
                 </ul>
-            </div>
-        </nav>
+  </div>
+</nav>
+
+        <!--<nav class="navbar navbar-expand-lg navbar-light">-->
+        <!--    <a class="navbar__brand navbar__mainLogo" href="/"></a>-->
+        <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+        <!--        <span class="navbar-toggler-icon"></span>-->
+        <!--    </button>-->
+        <!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+        <!--        <ul class="navbar-nav">-->
+        <!--            <li class="nav-item">-->
+        <!--                <a class="nav-link" href="{{ action('Admin\DogsController@create') }}">投稿<span class="sr-only">(current)</span></a>-->
+        <!--            </li>-->
+        <!--            <li class="nav-item">-->
+        <!--                <a class="nav-link" href="{{ action('Admin\DogsController@mypage') }}">マイページ</a>-->
+        <!--            </li>-->
+        <!--            <li class="nav-item">-->
+        <!--                <a class="nav-link" href="{{ action('Admin\DogsController@create_profile') }}">プロフィール作成</a>-->
+        <!--            </li>-->
+        <!--        </ul>-->
+        <!--         Right Side Of Navbar -->
+        <!--        <ul class="navbar-nav ml-auto">-->
+        <!--        {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}-->
+        <!--            @guest-->
+        <!--                <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>-->
+        <!--                {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}-->
+        <!--                @else-->
+        <!--                <li class="nav-item dropdown">-->
+        <!--                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>-->
+        <!--                {{ Auth::user()->name }} <span class="caret"></span>-->
+        <!--                </a>-->
+                        
+        <!--                <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+        <!--                <a class="dropdown-item" href="{{ route('logout') }}"-->
+        <!--                onclick="event.preventDefault();-->
+        <!--                             document.getElementById('logout-form').submit();">-->
+        <!--                {{ __('Logout') }}-->
+        <!--                </a>-->
+                        
+        <!--                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">-->
+        <!--                @csrf-->
+        <!--                </form>-->
+        <!--                </div>-->
+        <!--                </li>-->
+        <!--            @endguest-->
+        <!--        </ul>-->
+        <!--    </div>-->
+        <!--</nav>-->
         
         <main>
             @yield('content')
         </main>
+        
     </body>
     
 </html>

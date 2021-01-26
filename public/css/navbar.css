@@ -1,46 +1,45 @@
 
-.navbar {
-  background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
-  height: 60px;
-}
+/*.navbar {*/
+/*  background-color: #fff;*/
+/*  border-bottom: 1px solid rgba(0, 0, 0, 0.0975);*/
+/*  height: 60px;*/
+/*}*/
 
-.navbar__brand {
-  height: 28px;
-  width: 270px;
-  background-size: 250px;
-  
-}
+/*.navbar__brand {*/
+/*  height: 28px;*/
+/*  width: 270px;*/
+/*  background-size: 250px;*/
+/*}*/
 
-.navbar__mainLogo {
-  /*margin-top: 30px;*/
-  background-repeat: no-repeat;
-  background-image: url("/images/dog_garden_logo.png");
-}
+/*.navbar__mainLogo {*/
+/*  margin-top: 30px;*/
+/*  background-repeat: no-repeat;*/
+/*  background-image: url("/images/dog_garden_logo.png");*/
+/*}*/
 
-.navbar-nav > li {
-  margin-left: 20px;
-}
+/*.navbar-nav > li {*/
+/*  margin-left: 20px;*/
+/*}*/
 
-.navbar-nav > li .commonNavIcon {
-  height: 24px;
-  width: 24px;
-  background-size: 22px !important;
-  background-repeat: no-repeat;
-}
+/*.navbar-nav > li .commonNavIcon {*/
+/*  height: 24px;*/
+/*  width: 24px;*/
+/*  background-size: 22px !important;*/
+/*  background-repeat: no-repeat;*/
+/*}*/
 
-.navbar-nav > li .create-icon {
-  background-image: url("/images/plus-square.svg");
-}
+/*.navbar-nav > li .create-icon {*/
+/*  background-image: url("/images/plus-square.svg");*/
+/*}*/
 
-.navbar-nav > li .profile-icon {
-  background-image: url("/images/person-square.svg");
-}
+/*.navbar-nav > li .profile-icon {*/
+/*  background-image: url("/images/person-square.svg");*/
+/*}*/
 
-.navbar-nav > li .login-icon {
-  background-image: url("/images/gear-wide.svg");
-}
+/*.navbar-nav > li .login-icon {*/
+/*  background-image: url("/images/gear-wide.svg");*/
+/*}*/
 
-.navbar-nav > li .logout-icon {
-  background-image: url("/images/gear-wide.svg");
-}
+/*.navbar-nav > li .logout-icon {*/
+/*  background-image: url("/images/gear-wide.svg");*/
+/*}*/
