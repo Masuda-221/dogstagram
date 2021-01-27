@@ -146,7 +146,10 @@ return [
     */
 
     'attributes' => [
-        'image-path' => '画像'
+        'image' =>'画像',
+        'pref' =>'都道府県',
+        'city' =>'市町村',
+        'place' =>'キーワード',
         ],
 
 ];

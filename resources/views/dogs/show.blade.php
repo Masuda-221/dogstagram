@@ -20,13 +20,8 @@
                   @else
                   <h1 class="text-secondary">ニックネームは未設定です</h1>
                   @endif
+                  @include('admin.dogs.edit_profile_button',['user'=>$user])
                   
-                  <!--@if(!empty($user->profile->id))-->
-                  <!--<a class="btn btn-outline-dark common-btn edit-profile-btn" href="/admin/dogs/edit?id={{$user->profile->id}}">プロフィールを編集</a>-->
-                  <!--{{--<a class="btn btn-outline-dark common-btn edit-profile-btn" rel="nofollow" data-method="POST" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>--}}-->
-                  <!--@else-->
-                  <!--<h1>　</h1>-->
-                  <!--@endif-->
                   
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                 </div>
@@ -85,9 +80,7 @@
           <p class="card-text card-maintext">{{ $post->place }}</p>
           <p class="card-text card-maintext">{{ $post->city }}</p>
           <p class="card-text card-maintext">{{ $post->body }}</p>
-          <div>
-            <a href="{{ action('Admin\DogsController@mycontents_edit', ['id' => $post->id]) }}">編集</a>
-          </div>
+          @include('admin.dogs.edit_button',['user'=>$user])
           
           {{--コメントを表示する--}}
           @foreach ($post->comments as $comment) 
