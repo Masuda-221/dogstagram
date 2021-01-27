@@ -192,7 +192,6 @@ class DogsController extends Controller
         $user = Auth::user();
         $count_followings = $user->followings()->count();
         $count_followers = $user->followers()->count();
-         
         return view('admin.dogs.mypage', ['user' => $user,'count_followings' => $count_followings,'count_followers' => $count_followers]);
     }
     
