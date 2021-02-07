@@ -9,6 +9,9 @@ use App\User;
 use App\Profile;
 use Auth;
 
+// 今回はピカチュウをという存在を定義するために、Pikachuというクラスを作成します。 
+// 1つのモデルに対する一連の操作をまとめたものがcontroller
+// dogsに関連する処理を定義します。（Postcontollerの方が名前的にはよかった、なぜならPost Modelを使っているから）
 class DogsController extends Controller
 {
     // 投稿された記事の一覧を表示する
@@ -22,25 +25,27 @@ class DogsController extends Controller
         
         $query = Post::query();
         
+        
         if ($pref != '') {
+        // where(条件検索)　'pref'カラムが'$pref'
         $query->where('pref', $pref);
         }
-        
+        //$cityがからじゃない時
         if(!empty($city)) {
+        // 部分一致    
         $query->where('city', 'like', '%'.$city.'%');
         }
         
         if ($place != '') {
         $query->where('place', 'like', '%'.$place.'%');
         }
-        
+        // &&(aとbが両方含まれる)
         if ($request->tags && 0 < count($request->tags)){
         // 画面から来たタグを持つ投稿をすべて検索する。（idはpostのid）
         $query->whereIn('id', Post::getPostIdbyTags($request->tags));
         }
         
         $posts = $query->get();
-        
         return view('dogs.index', ['posts' => $posts, 'pref' => $pref, 'tags' => $tags]);
     }
     
