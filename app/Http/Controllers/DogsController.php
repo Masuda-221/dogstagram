@@ -11,6 +11,7 @@ use Auth;
 
 // 今回はピカチュウをという存在を定義するために、Pikachuというクラスを作成します。 
 // 1つのモデルに対する一連の操作をまとめたものがcontroller
+// contorollerを必要としないModelもある
 // dogsに関連する処理を定義します。（Postcontollerの方が名前的にはよかった、なぜならPost Modelを使っているから）
 class DogsController extends Controller
 {
