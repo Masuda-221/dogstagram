@@ -46,7 +46,7 @@ class DogsController extends Controller
         $query->whereIn('id', Post::getPostIdbyTags($request->tags));
         }
         
-        $posts = $query->get();
+        $posts = $query->get()->sortByDesc('created_at');
         return view('dogs.index', ['posts' => $posts, 'pref' => $pref, 'tags' => $tags]);
     }
     
