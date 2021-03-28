@@ -12,7 +12,8 @@
         <img class="round-img" src="{{ secure_asset('/images/blank_profile.png') }}"/>
       @endif
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 mypagebox">
+      
       <div class="row">
         @if(!empty($user->profile->nickname))
           <h1>{{ $user->profile->nickname }}</h1>
